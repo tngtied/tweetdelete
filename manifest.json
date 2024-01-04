@@ -1,0 +1,22 @@
+{
+    "name": "트윗 삭제 확장 프로그램",
+    "description": "트위터의 트윗을 일괄 삭제, 내보내기해주는 크롬 확장 프로그램입니다.",
+    "version": "1.0",
+    "manifest_version": 3,
+    "background": {
+      "service_worker": "background.js"
+    },
+    "permissions": [
+      "storage",
+      "activeTab",
+      "scripting"
+    ],
+    "action": {
+      "default_popup": "popup.html"
+    },
+
+
+    "author": {
+        "email": "tngtied@gmail.com"
+    }
+  }
