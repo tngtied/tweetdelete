@@ -45,6 +45,16 @@ async function deleteTweets() {
       }
       // is a tweet
       else {
+        var authorId = tweet.querySelectorAll('[role="link"]')[0].getAttribute("href").substring(1)
+        var hrefArray = location.href.split("/")
+        console.log("authorId: ", authorId, "hrefArray: ", hrefArray)
+        if (authorId != hrefArray[hrefArray.length - 1] && authorId != hrefArray[hrefArray.length - 2]){
+            console.log("not the account owner's tweet...")
+            //it's not the user's tweet
+            continue;
+        }else{
+            console.log("deleting the right tweet")
+        }
         tweet.querySelectorAll('[data-testid="caret"]')[0].click();
         console.log(
           "role menuitem: ",
@@ -62,16 +72,7 @@ async function deleteTweets() {
           "confirmationSheetConfirm",
           document.querySelectorAll('[data-testid="confirmationSheetConfirm"]')
         );
-        if (
-          document.querySelectorAll(
-            '[data-testid="confirmationSheetConfirm"]'
-          )[0] == undefined
-        ) {
-          console.log("undefined...");
-          reloadFlag = true;
-          break;
-          //this.runflag = false;
-        }
+
         document
           .querySelectorAll('[data-testid="confirmationSheetConfirm"]')[0]
           .click();
