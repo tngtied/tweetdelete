@@ -7,8 +7,8 @@ button {
     border-radius: 2px;
   }
 #tweetDelete {
-    color: green;
+    background-color: green;
 }
 #deleteStop {
-    color: red;
+    background-color: red;
 }
