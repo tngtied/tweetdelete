@@ -60,32 +60,45 @@ async function deleteTweets() {
           "role menuitem: ",
           document.querySelectorAll('[role="menuitem"]')
         );
-        console.log(
-          "role menuitem[0]: ",
-          document.querySelectorAll('[role="menuitem"]')[0]
-        );
-        await sleep(1000);
+        if ( document.querySelectorAll('[role="menuitem"]')[0] == undefined) {
+            console.log("undefined...");
+            reloadFlag = true;
+            continue;
+            //this.runflag = false;
+          }
+        await sleep(500);
 
         document.querySelectorAll('[role="menuitem"]')[0].click();
-        await sleep(2000);
+        // 답글 페이지에서 작동할 시 팔로우해버리는 경우가 종종 발생
+        // delete버튼이 맞는지 확인하는 부분을 넣기
+        await sleep(500);
         console.log(
           "confirmationSheetConfirm",
           document.querySelectorAll('[data-testid="confirmationSheetConfirm"]')
         );
-
+        if (
+          document.querySelectorAll(
+            '[data-testid="confirmationSheetConfirm"]'
+          )[0] == undefined
+        ) {
+          console.log("undefined...");
+          reloadFlag = true;
+          continue;
+          //this.runflag = false;
+        }
         document
           .querySelectorAll('[data-testid="confirmationSheetConfirm"]')[0]
           .click();
       }
     }
-    if (reloadFlag) {
-      window.location.reload();
-      reloadFlag = false;
-    } else {
-      window.scrollBy(0, 10000);
-    }
+    // if (reloadFlag) {
+    //   window.location.reload();
+    //   reloadFlag = false;
+    // } else {
+    //   
+    // }
     //
-
+    window.scrollBy(0, 10000);
     await sleep(4000);
     //less than 4000 might be rate limited or account suspended. increase timeout if any suspend or rate limit happens
   }
