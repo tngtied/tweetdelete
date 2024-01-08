@@ -60,17 +60,21 @@ async function deleteTweets() {
           "role menuitem: ",
           document.querySelectorAll('[role="menuitem"]')
         );
-        if ( document.querySelectorAll('[role="menuitem"]')[0] == undefined) {
+        if (document.querySelectorAll('[role="menuitem"]')[0] == undefined) {
             console.log("undefined...");
             reloadFlag = true;
             continue;
             //this.runflag = false;
           }
+        else if (document.querySelectorAll('[role="menuitem"]')[0].querySelector('span').innerText != "Delete"){
+          continue;
+        // 답글 페이지에서 작동할 시 팔로우해버리는 경우가 종종 발생
+        // delete버튼이 맞는지 확인하는 부분
+        }
         await sleep(500);
 
         document.querySelectorAll('[role="menuitem"]')[0].click();
-        // 답글 페이지에서 작동할 시 팔로우해버리는 경우가 종종 발생
-        // delete버튼이 맞는지 확인하는 부분을 넣기
+
         await sleep(500);
         console.log(
           "confirmationSheetConfirm",
